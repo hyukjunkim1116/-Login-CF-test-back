@@ -7,4 +7,5 @@ urlpatterns = [
     path("log-out/", views.LogOut.as_view()),
     path("github", views.GithubLogIn.as_view()),
     path("kakao", views.KakaoLogIn.as_view()),
+    path("google", views.GoogleLogIn.as_view()),
 ]
