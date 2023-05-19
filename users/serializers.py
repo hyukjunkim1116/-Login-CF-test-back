@@ -5,10 +5,4 @@ from .models import User
 class TinyUserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = (
-            "name",
-            "avatar",
-            "username",
-            "id",
-            "user_permissions",
-        )
+        exclude = ("password",)

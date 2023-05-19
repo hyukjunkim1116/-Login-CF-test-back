@@ -6,18 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.exceptions import ParseError, NotFound
 from . import serializers
 from .models import User
 import pprint
-
-
-class Me(APIView):
-    def get(self, request):
-        user = request.user
-        serializer = serializers.TinyUserSerializer(user).data
-        return Response(serializer)
 
 
 class Users(APIView):
@@ -34,6 +27,15 @@ class Users(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+
+class Me(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = serializers.TinyUserSerializer(user).data
+        return Response(serializer)
 
 
 class KakaoLogIn(APIView):
@@ -63,7 +65,7 @@ class KakaoLogIn(APIView):
             kakao_account = user_data.get("kakao_account")
             profile = kakao_account.get("profile")
             try:
-                user = User.objects.get(id=user_data.get("id"))
+                user = User.objects.get(username=profile.get("nickname"))
                 login(request, user)
                 return Response(status=status.HTTP_200_OK)
             except User.DoesNotExist:
@@ -98,6 +100,7 @@ class GithubLogIn(APIView):
                 },
             )
             user_data = user_data.json()
+
             user_emails = requests.get(
                 "https://api.github.com/user/emails",
                 headers={
@@ -106,8 +109,9 @@ class GithubLogIn(APIView):
                 },
             )
             user_emails = user_emails.json()
+            print(user_data["name"])
             try:
-                user = User.objects.get(email=user_emails[0]["email"])
+                user = User.objects.get(username=user_data["name"])
                 login(request, user)
                 return Response(status=status.HTTP_200_OK)
             except User.DoesNotExist:
@@ -142,6 +146,7 @@ class GoogleLogIn(APIView):
                 },
             )
             user_data = user_data.json()
+
             try:
                 user = User.objects.get(email=user_data.get("email"))
                 login(request, user)
@@ -162,7 +167,8 @@ class GoogleLogIn(APIView):
 
 
 class LogOut(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
-        sleep(5)
         logout(request)
-        return Response({"ok": "bye!"})
+        return Response({"ok": "bye!"}, status=status.HTTP_200_OK)
