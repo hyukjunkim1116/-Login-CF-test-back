@@ -8,7 +8,7 @@ class Photo(models.Model):
     )
 
     def __str__(self) -> str:
-        return "Photo File"
+        return str(self.id)
 
 
 # Create your models here.
