@@ -1,16 +1,13 @@
-from time import sleep
-import jwt
 import requests
 from django.conf import settings
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.exceptions import ParseError, NotFound
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import ParseError
 from . import serializers
 from .models import User
-import pprint
 
 
 class Users(APIView):
@@ -61,7 +58,6 @@ class KakaoLogIn(APIView):
                 },
             )
             user_data = user_data.json()
-            pprint.pprint(user_data)
             kakao_account = user_data.get("kakao_account")
             profile = kakao_account.get("profile")
             try:
@@ -109,7 +105,6 @@ class GithubLogIn(APIView):
                 },
             )
             user_emails = user_emails.json()
-            print(user_data["name"])
             try:
                 user = User.objects.get(username=user_data["name"])
                 login(request, user)
@@ -170,7 +165,5 @@ class LogOut(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        print(request)
         logout(request)
-        sleep(5)
         return Response({"ok": "bye!"}, status=status.HTTP_200_OK)

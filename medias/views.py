@@ -1,11 +1,9 @@
 import requests
 from django.conf import settings
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK
 from rest_framework.views import APIView
 from .models import Photo
-from rest_framework.exceptions import NotFound, PermissionDenied
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.exceptions import NotFound
 from .serializers import PhotoSerializer
 
 
