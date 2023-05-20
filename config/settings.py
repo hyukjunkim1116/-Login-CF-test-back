@@ -64,7 +64,7 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     )
 }
@@ -146,8 +146,8 @@ AUTH_USER_MODEL = "users.User"
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
-# CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"]
-CSRF_TRUSTED_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"]
+# CSRF_TRUSTED_ALL_ORIGINS = True
 
 GH_SECRET = env("GH_SECRET")
 GC_API_KEY = env("GC_API_KEY")

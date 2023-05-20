@@ -170,5 +170,7 @@ class LogOut(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        print(request)
         logout(request)
+        sleep(5)
         return Response({"ok": "bye!"}, status=status.HTTP_200_OK)
