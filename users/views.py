@@ -161,6 +161,43 @@ class GoogleLogIn(APIView):
             print(e)
 
 
+class NaverLogIn(APIView):
+    def post(self, request):
+        try:
+            code = request.data.get("code")
+            access_token = requests.post(
+                f"https://nid.naver.com/oauth2.0/token?code={code}&client_id={settings.NC_ID}&client_secret={settings.NC_SECRET}",
+                headers={"Accept": "application/json"},
+            )
+            access_token = access_token.json().get("access_token")
+            user_data = requests.get(
+                "https://openapi.naver.com/v1/nid/me",
+                headers={
+                    "Authorization": f"Bearer {access_token}",
+                    "Accept": "application/json",
+                },
+            )
+            user_data = user_data.json()
+            print(user_data)
+            try:
+                user = User.objects.get(username=user_data["name"])
+                login(request, user)
+                return Response(status=status.HTTP_200_OK)
+            except User.DoesNotExist:
+                user = User.objects.create(
+                    username=user_data.get("login"),
+                    email=user_emails[0]["email"],
+                    name=user_data.get("name"),
+                    avatar=user_data.get("avatar_url"),
+                )
+                user.set_unusable_password()
+                user.save()
+                login(request, user)
+                return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+
+
 class LogOut(APIView):
     permission_classes = [IsAuthenticated]
 

@@ -147,6 +147,8 @@ GC_SECRET = env("GC_SECRET")
 
 CF_ID = env("CF_ID")
 CF_TOKEN = env("CF_TOKEN")
+NC_ID = env("NC_ID")
+NC_ID = env("NC_SECRET")
 
 SECRET_KEY = env("SECRET_KEY")
 
