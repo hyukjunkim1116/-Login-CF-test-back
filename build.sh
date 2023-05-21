@@ -3,7 +3,7 @@
 set -o errexit
 
 pip install --upgrade pip
-pip install poetry==1.2.0
+pip install poetry==1.2.1
 rm poetry.lock
 poetry lock
 python -m poetry install
