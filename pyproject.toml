@@ -8,7 +8,7 @@ packages = [{include = "gh_kk_cf_django_backend"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = "^4.2.1"
+django = "~4.0"
 djangorestframework = "^3.14.0"
 requests = "^2.30.0"
 simplejwt = "^2.0.1"
