@@ -130,11 +130,15 @@ if not DEBUG:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
-# CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:3000"]
-CORS_ALLOW_ALL_ORIGINS = True
+if DEBUG:
+    # CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:3000"]
+    CORS_ALLOW_ALL_ORIGINS = True
 
+    CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"]
+else:
+    CORS_ALLOWED_ORIGINS = ["https://airbnbclone-front.onrender.com"]
+    CSRF_TRUSTED_ORIGINS = ["https://airbnbclone-front.onrender.com"]
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"]
 
 GH_SECRET = env("GH_SECRET")
 GC_API_KEY = env("GC_API_KEY")
