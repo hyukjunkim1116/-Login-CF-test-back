@@ -45,7 +45,7 @@ class KakaoLogIn(APIView):
                 data={
                     "grant_type": "authorization_code",
                     "client_id": "5c41d07be161c81979b0eb05ec72f14b",
-                    "redirect_uri": "http://127.0.0.1:3000/social/kakao",
+                    "redirect_uri": "https://drinkdrinkdrink.xyz/social/kakao",
                     "code": code,
                 },
             )
@@ -129,7 +129,7 @@ class GoogleLogIn(APIView):
         try:
             code = request.data.get("code")
             access_token = requests.post(
-                f"https://oauth2.googleapis.com/token?code={code}&client_id={settings.GC_ID}&client_secret={settings.GC_SECRET}&redirect_uri=http://127.0.0.1:3000/social/google&grant_type=authorization_code",
+                f"https://oauth2.googleapis.com/token?code={code}&client_id={settings.GC_ID}&client_secret={settings.GC_SECRET}&redirect_uri=https://drinkdrinkdrink.xyz/social/google&grant_type=authorization_code",
                 headers={"Accept": "application/json"},
             )
             access_token = access_token.json().get("access_token")
