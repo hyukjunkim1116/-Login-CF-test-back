@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["hyukjunkim1116 <nmkk1234@naver.com>"]
 readme = "README.md"
-packages = [{include = "gh_kk_cf_django_backend"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
