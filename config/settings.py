@@ -14,9 +14,9 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = [
-    # "127.0.0.1",
+    "127.0.0.1",
     "localhost",
-    # "backend.airbnbclonetest.xyz",
+    "backend.drinkdrinkdrink.xyz",
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
@@ -133,11 +133,11 @@ AUTH_USER_MODEL = "users.User"
 if DEBUG:
     # CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:3000"]
     CORS_ALLOW_ALL_ORIGINS = True
-
     CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"]
 else:
-    CORS_ALLOWED_ORIGINS = ["https://airbnbclone-front.onrender.com"]
-    CSRF_TRUSTED_ORIGINS = ["https://airbnbclone-front.onrender.com"]
+    CORS_ALLOWED_ORIGINS = ["https://drinkdrinkdrink.xyz"]
+    CSRF_TRUSTED_ORIGINS = ["https://drinkdrinkdrink.xyz"]
+
 CORS_ALLOW_CREDENTIALS = True
 
 GH_SECRET = env("GH_SECRET")
