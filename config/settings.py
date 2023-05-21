@@ -14,9 +14,9 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
     "localhost",
     "backend.drinkdrinkdrink.xyz",
+    "airbnbclone-cjrc:10000",
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
