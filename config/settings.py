@@ -14,6 +14,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = [
+    "127.0.0.1",
     "localhost",
     "backend.drinkdrinkdrink.xyz",
     "airbnbclone-cjrc:10000",
@@ -148,7 +149,7 @@ GC_SECRET = env("GC_SECRET")
 CF_ID = env("CF_ID")
 CF_TOKEN = env("CF_TOKEN")
 NC_ID = env("NC_ID")
-NC_ID = env("NC_SECRET")
+NC_SECRET = env("NC_SECRET")
 
 SECRET_KEY = env("SECRET_KEY")
 
