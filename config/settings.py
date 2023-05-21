@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ko-kr"
 
-TIME_ZONE = "Asia/seoul"
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
@@ -145,3 +145,15 @@ CF_ID = env("CF_ID")
 CF_TOKEN = env("CF_TOKEN")
 
 SECRET_KEY = env("SECRET_KEY")
+
+if not DEBUG:
+    SESSION_COOKIE_DOMAIN = ".drinkdrinkdrink.xyz"
+    CSRF_COOKIE_DOMAIN = ".drinkdrinkdrink.xyz"
+    sentry_sdk.init(
+        dsn="https://5344b5a4537c4c7bb8a18457d9905e05@o285966.ingest.sentry.io/4503890242961408",
+        integrations=[
+            DjangoIntegration(),
+        ],
+        traces_sample_rate=1.0,
+        send_default_pii=True,
+    )
